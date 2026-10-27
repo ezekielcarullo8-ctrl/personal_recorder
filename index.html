@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a" id="themeMeta">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Student Ledger">
+<title>Student Ledger Pro</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<div class="bgg"></div>
+<header class="hd">
+  <div><div class="ttl">PERSONAL RECORDERR</div><div class="sub" id="sub">Savings &amp; money sent</div></div>
+  
+  <div class="acts"><button class="ib" data-a="theme" id="thB" aria-label="Toggle theme">🌙</button></div>
+  
+</header>
+
+<main>
+<div class="bal"><button class="ib" data-a="priv" aria-label="Hide amounts">👁️</button><div class="lb">Total balance</div><div class="bv amt" id="bal">₱0.00</div></div>
+<section class="tab on" id="t-home">
+<div class="g2"><div class="st"><div class="sv in" id="pIn">+₱0.00</div><div class="sl">Total saved</div></div><div class="st"><div class="sv out" id="pOut">-₱0.00</div><div class="sl">Total sent</div></div></div>
+<div class="card"><div class="ch"><div class="ct" id="monthTitle">This week activity</div><div class="lg"><span><i style="background:var(--in)"></i>Saved</span><span><i style="background:var(--out)"></i>Sent</span></div></div><div class="bars" id="bars"></div><div class="pm"><span id="weekSaved"></span><span id="weekSent"></span></div></div>
+<button class="gbtn" data-a="pinSettings">🔒 PIN &amp; security settings</button></div><div class="ov" id="pinSettings"><div class="sh"><div class="mh"><span>App PIN</span><button class="ib" data-a="back" aria-label="Close">✕</button></div><div class="sl" id="pinStatus">No PIN set</div><div class="fg"><label class="fl" for="pinCurrent">Current PIN (required to change or remove)</label><input class="fi" id="pinCurrent" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" pattern="[0-9]{4,8}" placeholder="4–8 digits"></div><div class="fg"><label class="fl" for="pinNew">New PIN (4–8 digits)</label><input class="fi" id="pinNew" type="password" inputmode="numeric" autocomplete="new-password" maxlength="8" pattern="[0-9]{4,8}" placeholder="Leave blank to keep current setting"></div><div class="fg"><label class="fl" for="pinConfirm">Confirm new PIN</label><input class="fi" id="pinConfirm" type="password" inputmode="numeric" autocomplete="new-password" maxlength="8" pattern="[0-9]{4,8}" placeholder="Re-enter new PIN"></div><button class="gbtn" data-a="setPin">Save PIN</button><button class="gbtn" data-a="removePin">Remove PIN</button><div class="sl">This is a local app lock only. It does not encrypt ledger data stored in this browser.</div></div></div><div class="card"><div class="ch"><div class="ct">Backup &amp; data</div></div><div class="sl" id="lbk">No backup yet</div><button class="gbtn" data-a="exp">💾 Export backup (JSON)</button><button class="gbtn" data-a="imp">📂 Import backup</button><button class="gbtn" data-a="csv">📄 Export spreadsheet (CSV)</button><button class="dbtn" data-a="rst">⚠ Reset all data</button></div>
+</section>
+<section class="tab" id="t-sav"><div class="card"><div class="ch"><div class="ct">📥 Record savings</div></div><form data-f="Savings" autocomplete="off"><div class="fg"><label class="fl">Amount (₱)</label><input class="fi big" name="amount" type="number" inputmode="decimal" step="0.01" min="0.01" placeholder="0.00" required></div><div class="fg"><label class="fl">Date</label><input class="fi" name="date" type="date" required></div><div class="fg"><label class="fl">Note (optional)</label><input class="fi" name="note" type="text" placeholder="Description" maxlength="60"></div><button class="sbtn" type="submit">Save entry</button></form></div></section>
+<section class="tab" id="t-sent"><div class="card"><div class="ch"><div class="ct">💸 Record money sent</div></div><form data-f="Money Sent" autocomplete="off"><div class="fg"><label class="fl">Amount (₱)</label><input class="fi big" name="amount" type="number" inputmode="decimal" step="0.01" min="0.01" placeholder="0.00" required></div><div class="fg"><label class="fl">Date</label><input class="fi" name="date" type="date" required></div><div class="fg"><label class="fl">Recipient name</label><input class="fi" name="recipient" list="rl" type="text" placeholder="Recipient Name" required></div><div class="fg"><label class="fl">Address / location</label><input class="fi" name="address" list="al" type="text" placeholder="Recipient Address" required></div><div class="fg"><label class="fl">Note (optional)</label><input class="fi" name="note" type="text" placeholder="Description" maxlength="60"></div><button class="sbtn red" type="submit">Record money sent</button></form></div></section>
+<section class="tab" id="t-logs"><div class="sr"><input class="fi" id="q" type="search" placeholder="Search name, place, note…"></div><div class="fg"><label class="fl" for="fD">Filter by date</label><input class="fi" id="fD" type="date"></div><div class="chips fit" id="ft"><button class="chip on" data-a="ft" data-v="all">All</button><button class="chip" data-a="ft" data-v="Savings">Savings</button><button class="chip" data-a="ft" data-v="Money Sent">Sent</button></div><div class="pm" style="margin:0 2px 4px"><span id="rc"></span><span class="amt" id="rt"></span></div><div id="list"></div></section>
+</main>
+<datalist id="rl"></datalist><datalist id="al"></datalist>
+<input type="file" id="imf" accept=".json,application/json" class="hid">
+
+<div class="ov" id="ed"><div class="sh">
+  <div class="mh"><span>Edit entry</span><button class="ib" data-a="back" aria-label="Close">✕</button></div>
+  <div class="chips fit"><button class="chip on" data-a="et" data-v="Savings" id="et-S">📥 Savings</button><button class="chip" data-a="et" data-v="Money Sent" id="et-M">💸 Sent</button></div>
+  <div class="fg"><label class="fl">Amount (₱)</label><input class="fi" id="eA" type="number" inputmode="decimal" step="0.01" min="0.01"></div>
+  <div class="fg" id="eRg"><label class="fl">Recipient</label><input class="fi" id="eR" list="rl" type="text"></div>
+  <div class="fg" id="eAg"><label class="fl">Address / location</label><input class="fi" id="eAd" list="al" type="text"></div>
+  <div class="fg" id="eNg"><label class="fl">Note (optional)</label><input class="fi" id="eN" type="text" maxlength="60"></div>
+  <div class="fg"><label class="fl">Date</label><input class="fi" id="eD" type="date"></div>
+  <button class="sbtn" data-a="esave">Save changes</button><button class="dbtn" data-a="edel">Delete entry</button>
+</div></div>
+
+<div class="ov" id="cf"><div class="sh"><div class="mh" style="margin-bottom:8px;font-size:18px" id="cT">Are you sure?</div><div class="sl" style="font-size:14px;line-height:1.5;color:var(--tx2)" id="cM"></div>
+  <div class="ca"><button data-a="back">Cancel</button><button class="y" data-a="cyes" id="cB">Confirm</button></div></div></div>
+
+<div id="pinGate" style="display:none;position:fixed;inset:0;z-index:5000;background:var(--bg);align-items:center;justify-content:center;padding:24px"><form id="unlockForm" class="card" style="width:100%;max-width:360px"><div class="ct" style="margin-bottom:12px">🔒 Enter your PIN</div><div class="sl" style="margin-bottom:14px">Unlock Student Ledger to continue.</div><input class="fi" id="unlockPin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" pattern="[0-9]{4,8}" placeholder="4–8 digit PIN" required><div class="sl" id="pinError" style="color:var(--out);margin-top:8px"></div><button class="sbtn" type="submit">Unlock</button></form></div>
+<div class="tc" id="tc"><div class="toast" id="toast"></div></div>
+
+<nav class="nav" id="nav">
+  <button class="ni" data-a="tab" data-v="home"><span>🏠</span>Home</button>
+  <button class="ni" data-a="tab" data-v="sav"><span>📥</span>Savings</button>
+  <button class="ni" data-a="tab" data-v="sent"><span>💸</span>Sent</button>
+  <button class="ni" data-a="tab" data-v="logs"><span>📋</span>Logs</button>
+</nav>
+
+<script src="script.js" defer></script>
+</body>
+</html>
